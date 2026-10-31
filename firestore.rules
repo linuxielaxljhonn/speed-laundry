@@ -1,0 +1,11 @@
+rules_version = '2';
+// Speed Laundry · solo el dueño puede leer y escribir.
+// Si cambias de correo, cámbialo aquí.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null
+        && request.auth.token.email.lower() == 'linuxielaxl@gmail.com';
+    }
+  }
+}
